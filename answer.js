@@ -49,3 +49,35 @@ function validateUsername(username) {
     }
 
 }
+
+
+// Question 4
+function getCngFare(distance, isNight = false, waitingMinutes = 0){
+    let distanceFare = 0;
+    let nightFare = 0;
+    let waitingFare = 0;
+    let minimumDistance = 2;
+    let minimumFare = 50;
+    let perKiloFare = 15;
+    let nightFareBonus = 20;
+    let waitingChargesPerMinute = 2;
+
+    if(distance <= minimumDistance){
+        distanceFare = minimumFare;
+    }else{
+        let totalDistance = distance - minimumDistance;
+        distanceFare = minimumFare + (totalDistance * perKiloFare);
+    }
+
+    if(waitingMinutes > 0){
+        waitingFare = waitingChargesPerMinute * waitingMinutes;
+        distanceFare = distanceFare + waitingFare;
+    }
+
+    if(isNight){
+        nightFare = (distanceFare * nightFareBonus)/100 ;
+        distanceFare = distanceFare + nightFare;
+    }
+   
+    return distanceFare;
+}
